@@ -1,0 +1,59 @@
+html {
+  box-sizing: border-box;
+  font-size: $white;
+  font-weight: normal;
+  font-family: "Source Sans Pro", "Arial", sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, 
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+p, 
+ol, 
+ul,
+td,
+th,
+thead,
+tbody,
+table {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+body {
+  background: $page-grey;
+  margin: auto;
+}
+
+main, 
+header,
+footer {
+  max-width: $max-width;
+  background: $page-grey;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+header {
+  min-height: 138px;
+}

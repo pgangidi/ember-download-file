@@ -1,0 +1,13 @@
+{
+  "filesTitle": "Hello, this is Priyanka Gangidi.",
+  "loadingFiles": "Loading files available",
+  "selectorHeader": "select file",
+  "nameHeader": "Name",
+  "deviceHeader": "Device",
+  "pathHeader": "Path",
+  "statusHeader": "Status",
+  "selectableCheckboxLabel": "select to download file {name}",
+  "scheduledCheckboxLabel": "file {name} is unavailable for download",
+  "availableStatus": "Available",
+  "scheduledStatus": "Scheduled"
+}

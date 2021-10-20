@@ -1,0 +1,51 @@
+<caption class="is-sr-only">
+  Available and Scheduled Files listed below.
+  {{noOfFilesSelected}} files selected to download
+</caption>
+<thead>
+  <tr>
+    <th scope="col" class="file-table__selector-header">
+      <span class="is-sr-only">{{t "selectorHeader"}}</span>
+    </th>
+    <th scope="col" class="file-table__name-header">
+      {{t "nameHeader"}}
+    </th>
+    <th scope="col" class="file-table__device-header">
+      {{t "deviceHeader"}}
+    </th>
+    <th scope="col" class="file-table__path-header">
+      {{t "pathHeader"}}
+    </th>
+    <th scope="col" class="file-table__status-header">
+      {{t "statusHeader"}}
+    </th>
+  </tr>
+</thead>
+<tbody>
+  {{#each fileList as |file indx|}}
+    <tr class="file-table__row">
+      <td class="file-table__selector-cell">
+        <input type="checkbox" aria-disabled="{{file.isScheduled}}" aria-labelledby="checkbox-label"/>
+        <span id="checkbox-label" class="is-sr-only">
+          {{#if file.isAvailable}}
+            {{t "selectableCheckboxLabel" name=file.name}}
+            {{else}}
+              {{t "scheduledCheckboxLabel" name=file.name}}
+          {{/if}}
+        </span>
+      </td>
+      <td class="file-table__name-cell">
+        {{file.name}}
+      </td>
+      <td class="file-table__device-cell">
+        {{file.device}}
+      </td>
+      <td class="file-table__path-cell">
+        {{file.path}}
+      </td>
+      <td class="file-table__status-cell {{file.status}}">
+        {{file.status}}
+      </td>
+    </tr>
+  {{/each}}
+</tbody>

@@ -1,0 +1,10 @@
+.page-header {
+  background-color: $background-blue;
+  min-height: 25vh;
+  @include center-aligned-grid;
+
+  &__title {
+    font-size: $title-font-size;
+    color: $white;
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "name": "ember-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ember app configured on Windows",
+  "license": "",
+  "author": "Priyanka Gangidi",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "repository": "https://github.com/pgangidi/ember-app.git",
+  "scripts": {
+    "build": "ember build",
+    "build:prod": "ember build --prod",
+    "lint:hbs": "ember-template-lint .",
+    "lint:js": "eslint .",
+    "start": "ember serve",
+    "test": "ember test --server",
+    "commit": "cz",
+    "g:c": "ember g component",
+    "d:c": "ember d component",
+    "g:s": "ember g serializer",
+    "d:s": "ember d serializer",
+    "g:m": "ember g model",
+    "d:m": "ember d model",
+    "g:r": "ember g route",
+    "d:r": "ember d route",
+    "g:a": "ember g adapter",
+    "d:a": "ember d adapter",
+    "g:u": "ember g util",
+    "d:u": "ember d util",
+    "g:m:m": "ember g mirage-model",
+    "d:m:m": "ember d mirage-model",
+    "g:m:f": "ember g mirage-fixture",
+    "d:m:f": "ember d mirage-fixture"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@commitlint/cli": "^12.1.1",
+    "broccoli-asset-rev": "^2.4.5",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
+    "ember-ajax": "^3.0.0",
+    "ember-cli": "~2.18.0",
+    "ember-cli-app-version": "^3.0.0",
+    "ember-cli-babel": "^6.6.0",
+    "ember-cli-dependency-checker": "^2.0.0",
+    "ember-cli-eslint": "^4.2.1",
+    "ember-cli-htmlbars": "^2.0.1",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-qunit": "^4.1.1",
+    "ember-cli-sass": "^10.0.1",
+    "ember-cli-shims": "^1.2.0",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^2.0.0",
+    "ember-data": "~2.18.0",
+    "ember-cli-mirage": "^0.4.15",
+    "ember-export-application-global": "^2.0.0",
+    "ember-load-initializers": "^1.0.0",
+    "ember-resolver": "^4.0.0",
+    "ember-source": "~2.18.0",
+    "eslint-plugin-ember": "^5.0.0",
+    "husky": "^6.0.0",
+    "loader.js": "^4.2.3",
+    "sass": "^1.32.12"
+  },
+  "engines": {
+    "node": "^14.*",
+    "yarn": "1.22.11"
+  },
+  "dependencies": {
+    "ember-intl": "^3.0.0"
+  },
+  "husky": {
+    "commit-msg": "commitlint -e"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "cz-customizable": {
+      "config": "commitizen.config.js"
+    }
+  }
+}
