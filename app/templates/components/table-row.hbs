@@ -26,6 +26,7 @@
 </td>
 <td scope="row" class="table-row__path-cell">
   {{file.path}}
+  <a href={{file.path}} download id={{concat "download" file.id}} hidden></a>
 </td>
 <td scope="row" class="table-row__status-cell {{file.status}}">
   {{file.status}}
