@@ -6,7 +6,7 @@ export default Route.extend({
 
   /**
    * Fetches the file list before route loads.
-   * @returns {Object} Store data with File information.
+   * @returns {Object} Store with File information.
    */
   model() {
     this._super(...arguments);

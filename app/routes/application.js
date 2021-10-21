@@ -1,30 +1,25 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
-import { inject } from '@ember/service';
 
 export default Route.extend({
-  intl: inject(),
-
-  beforeModel(transition) {
-    this._super(...arguments);
-    
-    this.redirectToProfile(transition);
-  },
-
-  model() {
-    this._super(...arguments);
-
-    return {
-      name: 'Priyanka Gangidi',
-    }
-  },
-
-  
+  /**
+   * redirect to default route on initial load.
+   * @param {Object} transition route transition object
+   */
   redirectToProfile(transition){
     const targetRouteName = get(transition, 'targetName');
     if(targetRouteName && targetRouteName === 'index') {
       this.transitionTo('file-list');
     }
-  }
+  },
 
+  /**
+   * use before model hook to redirect to default route.
+   * @param {Object} transition route transition object
+   */
+  beforeModel(transition) {
+    this._super(...arguments);
+    
+    this.redirectToProfile(transition);
+  }
 });

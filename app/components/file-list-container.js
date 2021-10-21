@@ -8,7 +8,7 @@ export default Component.extend({
   classNames: 'file-container',
   intl: inject(),
   /**
-   * file array passed in from parent
+   * file information array passed in from parent
    */
   fileList: null,
 
@@ -24,7 +24,7 @@ export default Component.extend({
   isRoleAlertSet: false,
 
   /**
-   * Boolean that sets state of selected all checkbox
+   * Boolean that conveys state of selected all checkbox
    */
   isSelectedAllCheckboxChecked: false,
 
