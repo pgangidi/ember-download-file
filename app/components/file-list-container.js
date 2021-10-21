@@ -2,10 +2,11 @@ import Component from '@ember/component';
 import { computed, get, set, setProperties } from '@ember/object';
 import { countOccurrence } from './../utils/array-utils';
 import CONSTANTS from './../utils/global-constants';
+import { inject } from '@ember/service';
 
 export default Component.extend({
   classNames: 'file-container',
-
+  intl: inject(),
   /**
    * file array passed in from parent
    */
@@ -25,20 +26,28 @@ export default Component.extend({
    * count associated with the number of files 
    * selected at any point in time
    */
-  noOfFilesSelected: 0,
+  noOfFilesSelected: computed('noOfFilesSelected', 'isSelectedAllCheckboxChecked', 'isIndeterminate', function() {
+    const selectedFileArr = get(this, 'selectedFileArr');
+    return (selectedFileArr && get(selectedFileArr, 'length')) || 0;
+  }),
+
+  fileCountText: computed('noOfFilesSelected', function() {
+    const intlServ = get(this, 'intl')
+    return get(this, 'noOfFilesSelected') ? intlServ.t('selectedCount', {noOfFilesSelected: get(this,'noOfFilesSelected')}): intlServ.t('noneSelected')
+  }),
 
   /**
    * calculate the number of available files
    * based on 'isAvailable' status
    */
-  noOfAvailableFiles: computed('fileList','fileList.length', function() {
-    return countOccurrence(this.fileList, CONSTANTS.availableKey, true);
+  noOfAvailableFiles: computed('fileList', function() {
+    return countOccurrence(get(this, 'fileList'), CONSTANTS.availableKey, true);
   }),
 
   /**
    * calculate the number of scheduled files
    */
-  noOfScheduledFiles: computed('fileList','fileList.length', 'noOfAvailableFiles', function() {
+  noOfScheduledFiles: computed('fileList', 'noOfAvailableFiles', function() {
     return this.fileList.length - get(this, 'noOfAvailableFiles');
   }),
 
@@ -79,21 +88,28 @@ export default Component.extend({
    */
   setSelectAllState(len) {
     const noOfAvailableFiles = get(this, 'noOfAvailableFiles');
-    const selectAllCheckBox = document.getElementById('selectall-checkbox');
 
     if(len && len === noOfAvailableFiles) {
-      selectAllCheckBox.indeterminate = false;
-      selectAllCheckBox.checked = true;
+      set(this, 'isIndeterminate', false);
       set(this, 'isSelectedAllCheckboxChecked', true);
     } else if (len > 0 && noOfAvailableFiles > 0) {
-      selectAllCheckBox.checked = false;
-      selectAllCheckBox.indeterminate = true;
+      set(this, 'isIndeterminate', true);
       set(this, 'isSelectedAllCheckboxChecked', false);
     } else {
-      selectAllCheckBox.indeterminate = false;
-      selectAllCheckBox.checked = false;
+      set(this, 'isIndeterminate', false);
       set(this, 'isSelectedAllCheckboxChecked', false);
     }
+  },
+
+  setSelectedArr(selectedAllCheckboxState) {
+    let arr;
+    if(selectedAllCheckboxState) {
+      arr = [];  
+      get(this, 'fileList').map((file)=> {
+        get(file, 'isAvailable') && arr.push(file.id);
+      })
+    }
+    set(this, 'selectedFileArr', arr);
   },
 
   actions: {
@@ -111,10 +127,7 @@ export default Component.extend({
       }
       const arrLen = get(modifArr, 'length');
 
-      setProperties(this, {
-        selectedFileArr: modifArr,
-        noOfFilesSelected: arrLen
-      });
+      set(this,'selectedFileArr', modifArr);
       this.setSelectAllState(arrLen);
     },
 
@@ -123,7 +136,11 @@ export default Component.extend({
      * @param {Object} e Checkbox Click Event
      */
     onSelectAllClick(e) {
-      set(this, 'isSelectedAllCheckboxChecked', e.target.value);
+      const checkedState = e.target.checked;
+
+      set(this, 'isIndeterminate', false);
+      set(this, 'isSelectedAllCheckboxChecked', checkedState);
+      this.setSelectedArr(checkedState);
     }
   }
 

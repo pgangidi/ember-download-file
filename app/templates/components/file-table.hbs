@@ -24,36 +24,13 @@
 </thead>
 <tbody>
   {{#each fileList as |file indx|}}
-    <tr class="file-table__row">
-      <td class="file-table__selector-cell">
-        {{#if file.isAvailable}}
-          {{#if isSelectedAllCheckboxChecked}}
-            <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-labelledby="checkbox-label" aria-checked="true" checked>
-          {{else}}
-            <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-labelledby="checkbox-label" aria-checked="false">
-          {{/if}}
-          <span id="checkbox-label" class="is-sr-only">
-            {{t "selectableCheckboxLabel" name=file.name}}
-          </span>
-        {{else}}
-          <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-disabled="true" aria-labelledby="checkbox-label" aria-checked="false">
-          <span id="checkbox-label" class="is-sr-only">
-            {{t "scheduledCheckboxLabel" name=file.name}}
-          </span>
-        {{/if}}
-      </td>
-      <td class="file-table__name-cell">
-        {{file.name}}
-      </td>
-      <td class="file-table__device-cell">
-        {{file.device}}
-      </td>
-      <td class="file-table__path-cell">
-        {{file.path}}
-      </td>
-      <td class="file-table__status-cell {{file.status}}">
-        {{file.status}}
-      </td>
-    </tr>
+    {{table-row
+      file=file
+      indx=indx
+      onRowClick=onRowClick
+      selectedFileArr=selectedFileArr
+      noOfFilesSelected=noOfFilesSelected
+      isSelectedAllCheckboxChecked=isSelectedAllCheckboxChecked
+    }}
   {{/each}}
 </tbody>

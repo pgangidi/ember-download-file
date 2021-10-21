@@ -1,16 +1,16 @@
 <div class="file-container__link-wrapper">
   <div class="file-container__checkbox-section">
-    <input type="checkbox" id="selectall-checkbox" onClick={{action "onSelectAllClick"}} aria-checked="{{isSelectedAllCheckboxChecked}}">
-    <label for="selectall-checkbox" class="is-sr-only">
-      {{t "selectAllLabel"}}
-    </label>
+    {{simple-checkbox
+      checkboxId="selectall-checkbox"
+      onClick=(action "onSelectAllClick")
+      isChecked=isSelectedAllCheckboxChecked
+      isIndeterminate=isIndeterminate
+      labelText=(t "selectAllLabel")
+      labelClassNames="is-sr-only"
+    }}
   </div>
   <div role="alert" class="file-container__selected-count">
-    {{#if noOfFilesSelected}}
-      {{t "selectedCount" noOfFilesSelected=noOfFilesSelected}}
-    {{else}}
-      {{t "noneSelected"}}
-    {{/if}}
+    {{fileCountText}}
   </div>
   <div class="file-container__download-section">
     {{t "downloadSelected"}}
@@ -22,4 +22,5 @@
   noOfFilesSelected=noOfFilesSelected
   isSelectedAllCheckboxChecked=isSelectedAllCheckboxChecked
   onRowClick=(action "onRowClick")
+  selectedFileArr=selectedFileArr
 }}
