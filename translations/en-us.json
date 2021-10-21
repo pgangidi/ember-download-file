@@ -10,7 +10,7 @@
   "deviceHeader": "Device",
   "pathHeader": "Path",
   "statusHeader": "Status",
-  "selectableCheckboxLabel": "select to download file {name}",
+  "selectableCheckboxLabel": "select to mark file for download {name}",
   "scheduledCheckboxLabel": "file {name} is unavailable for download",
   "availableStatus": "Available",
   "scheduledStatus": "Scheduled"

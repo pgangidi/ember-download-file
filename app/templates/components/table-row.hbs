@@ -1,0 +1,32 @@
+<td class="table-row__selector-cell">
+  {{#if file.isAvailable}}
+    {{simple-checkbox
+      checkboxId=(concat "checkbox-input" indx)
+      onClick=(action "onCheckboxClick" file)
+      isChecked=checkboxCheckedState
+      labelText=(t "selectableCheckboxLabel" name=file.name)
+      labelClassNames="is-sr-only"
+    }}
+  {{else}}
+    {{simple-checkbox
+      checkboxId=(concat "checkbox-label" indx)
+      onClick=(action "onCheckboxClick" file)
+      isChecked=false
+      ariaDisabled=true
+      labelText=(t "scheduledCheckboxLabel" name=file.name)
+      labelClassNames="is-sr-only"
+    }}
+  {{/if}}
+</td>
+<td class="table-row__name-cell">
+  {{file.name}}
+</td>
+<td class="table-row__device-cell">
+  {{file.device}}
+</td>
+<td class="table-row__path-cell">
+  {{file.path}}
+</td>
+<td class="table-row__status-cell {{file.status}}">
+  {{file.status}}
+</td>
