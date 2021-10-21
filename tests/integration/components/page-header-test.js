@@ -1,24 +1,18 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('page-header', 'Integration | Component | page header', {
+moduleForComponent('page-header', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{page-header}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#page-header}}
-      template block text
-    {{/page-header}}
+test('when page header renders', async function(assert) {
+  await this.render(hbs`
+    {{page-header}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  const headerEl = document.getElementById('page-header');
+  const headerText = headerEl.innerText.trim();
+
+  assert.ok(headerEl, 'then header is rendered');
+  assert.equal(headerText, 'Hello, this is Priyanka Gangidi.', 'with right content,');
 });

@@ -8,7 +8,7 @@ export default Component.extend({
    * init hook
    * Set focus to page header on initial page load.
    */
-  init() {
+  didInsertElement() {
     this._super(...arguments);
 
     const headerEl = document.getElementById('page-header');
