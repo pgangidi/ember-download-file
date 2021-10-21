@@ -1,6 +1,7 @@
 <caption class="is-sr-only">
   Available and Scheduled Files listed below.
-  {{noOfFilesSelected}} files selected to download
+  {{noOfAvailableFiles}} files available to download.
+  {{noOfFilesSelected}} files selected to download.
 </caption>
 <thead>
   <tr>
@@ -25,14 +26,21 @@
   {{#each fileList as |file indx|}}
     <tr class="file-table__row">
       <td class="file-table__selector-cell">
-        <input type="checkbox" aria-disabled="{{file.isScheduled}}" aria-labelledby="checkbox-label"/>
-        <span id="checkbox-label" class="is-sr-only">
-          {{#if file.isAvailable}}
-            {{t "selectableCheckboxLabel" name=file.name}}
-            {{else}}
-              {{t "scheduledCheckboxLabel" name=file.name}}
+        {{#if file.isAvailable}}
+          {{#if isSelectedAllCheckboxChecked}}
+            <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-labelledby="checkbox-label" aria-checked="true" checked>
+          {{else}}
+            <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-labelledby="checkbox-label" aria-checked="false">
           {{/if}}
-        </span>
+          <span id="checkbox-label" class="is-sr-only">
+            {{t "selectableCheckboxLabel" name=file.name}}
+          </span>
+        {{else}}
+          <input onclick={{action "onCheckboxClick" file}} type="checkbox" aria-disabled="true" aria-labelledby="checkbox-label" aria-checked="false">
+          <span id="checkbox-label" class="is-sr-only">
+            {{t "scheduledCheckboxLabel" name=file.name}}
+          </span>
+        {{/if}}
       </td>
       <td class="file-table__name-cell">
         {{file.name}}

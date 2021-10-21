@@ -1,0 +1,26 @@
+.file-container {
+  &__link-wrapper {
+    display: flex;
+    flex-direction: row;
+    background-color: $white;
+    border-left: 1px solid $grey-border;
+    border-right: 1px solid $grey-border;
+    align-items:center;
+    font-size: $summary-font;
+  }
+
+  &__checkbox-section {
+    width: 5%;
+    padding: 10px;
+  }
+
+  &__selected-count {
+    width: 20%;
+    padding: 10px;
+  }
+
+  &__download-section {
+    width: 75%;
+    padding: 10px;
+  }
+}

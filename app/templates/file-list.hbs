@@ -1,5 +1,5 @@
 {{#if model}}
-  {{file-table fileList=model}}
-  {{else}}
-    {{t 'loadingFiles'}}
+  {{file-list-container fileList=model}}
+{{else}}
+  {{t 'loadingFiles'}}
 {{/if}}

@@ -9,6 +9,7 @@ export default {
     available: 'AVAILABLE'
   },
   defaultTableSortKey: 'name',
-  defaultErrorCode: 'APPSYS400'
+  defaultErrorCode: 'APPSYS400',
+  availableKey: 'isAvailable'
 
 }

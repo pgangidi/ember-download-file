@@ -1,6 +1,10 @@
 {
   "filesTitle": "Hello, this is Priyanka Gangidi.",
   "loadingFiles": "Loading files available",
+  "selectAllLabel": "Select all available files",
+  "noneSelected": "None Selected",
+  "downloadSelected": "Download Selected",
+  "selectedCount": "Selected {noOfFilesSelected}.",
   "selectorHeader": "select file",
   "nameHeader": "Name",
   "deviceHeader": "Device",

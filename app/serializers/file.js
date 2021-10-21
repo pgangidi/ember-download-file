@@ -22,6 +22,6 @@ export default DS.RESTSerializer.extend({
       attributes.errors = payload || [{errorCode: CONSTANTS.defaultErrorCode}];
     }
 
-    return this._super(store, primaryModelClass, attributes, id, requestType)
+    return this._super(store, primaryModelClass, attributes, id, requestType);
   }
 });
