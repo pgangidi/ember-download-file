@@ -1,4 +1,7 @@
 .file-container {
+  color: #000000;
+  margin-top: 15px;
+
   &__link-wrapper {
     display: flex;
     flex-direction: row;
@@ -22,5 +25,18 @@
   &__download-section {
     width: 75%;
     padding: 10px;
+  }
+
+  &__download-link {
+    color: $body-font-color;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+
+    svg {
+      height: 20px;
+      margin-bottom: -5px;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed, get, set, setProperties } from '@ember/object';
+import { computed, get, set } from '@ember/object';
 import { countOccurrence } from './../utils/array-utils';
 import CONSTANTS from './../utils/global-constants';
 import { inject } from '@ember/service';
@@ -16,6 +16,8 @@ export default Component.extend({
    * An array of file ids that are selected
    */
   selectedFileArr: null,
+
+  isRoleAlertSet: false,
 
   /**
    * Boolean that sets state of selected all checkbox
@@ -111,7 +113,11 @@ export default Component.extend({
     }
     set(this, 'selectedFileArr', arr);
   },
-
+  announceFilesSelected() {
+    const contEl = document.getElementById('select-file-count');
+    contEl.setAttribute('role', 'alert');
+    set(this, 'isRoleAlertSet', true);
+  },
   actions: {
     /**
      * set the selected file fields based on whether a row was selected/unselected.
@@ -129,6 +135,7 @@ export default Component.extend({
 
       set(this,'selectedFileArr', modifArr);
       this.setSelectAllState(arrLen);
+      !this.isRoleAlertSet && this.announceFilesSelected();
     },
 
     /**
@@ -141,6 +148,7 @@ export default Component.extend({
       set(this, 'isIndeterminate', false);
       set(this, 'isSelectedAllCheckboxChecked', checkedState);
       this.setSelectedArr(checkedState);
+      !this.isRoleAlertSet && this.announceFilesSelected();
     }
   }
 

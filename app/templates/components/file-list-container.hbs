@@ -9,11 +9,17 @@
       labelClassNames="is-sr-only"
     }}
   </div>
-  <div role="alert" class="file-container__selected-count">
+  <div id="select-file-count" class="file-container__selected-count">
     {{fileCountText}}
   </div>
   <div class="file-container__download-section">
-    {{t "downloadSelected"}}
+    <a href="#" class="file-container__download-link">
+      <svg role="presentation" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9.5h1.59c.89 0 1.33 1.08.7 1.71L12.7 15.8a.996.996 0 0 1-1.41 0L6.7 11.21c-.63-.63-.18-1.71.71-1.71H9v-5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v5zm-9 11c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1H6z" fill="#4B4B4B">
+        </path>
+      </svg>
+      {{t "downloadSelected"}}
+    </a>
   </div>
 </div>
 {{file-table 
