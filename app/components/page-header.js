@@ -1,9 +1,12 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
-import { computed, get } from '@ember/object';
-import { alias } from '@ember/object/computed';
 
 export default Component.extend({
   classNames: 'page-header',
-  tagName: 'section'
+  tagName: 'section',
+
+  init() {
+    this._super(...arguments);
+    const headerEl = document.getElementById('page-header');
+    headerEl && headerEl.focus();
+  },
 })
