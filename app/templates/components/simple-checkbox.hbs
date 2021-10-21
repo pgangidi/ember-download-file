@@ -1,0 +1,25 @@
+{{#if checkboxCheckedState}}
+  <input 
+    type="checkbox"
+    class={{inputClassNames}}
+    id={{checkboxId}}
+    onClick={{action "onCheckBoxClick"}}
+    aria-checked="true"
+    aria-disabled="{{ariaDisabled}}"
+    indeterminate=false
+    checked
+  >
+{{else}}
+  <input 
+    type="checkbox"
+    class={{inputClassNames}}
+    id={{checkboxId}}
+    onClick={{action "onCheckBoxClick"}}
+    aria-disabled="{{ariaDisabled}}"
+    aria-checked="false"
+    indeterminate={{checkboxIndeterminateState}}
+  >
+{{/if}}
+<label for={{checkboxId}} class={{labelClassNames}}>
+  {{labelText}}
+</label>
