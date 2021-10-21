@@ -5,40 +5,35 @@ export default Component.extend({
   tagName: '',
   isIndeterminate: false,
   isChecked: false,
-  checkboxCheckedState: false,
-  checkboxIndeterminateState: false,
-  ariaDisabled: false,
+  isDisabled: false,
   checkboxId: 'simple-checkbox',
   labelClassNames: '',
   inputClassNames: '',
   labelText: '',
 
-  init() {
+  didInsertElement() {
     this._super(...arguments);
 
-    const checkedState = get(this, 'isChecked');
-    const indeterminateState = get(this, 'isIndeterminate');
-    setProperties(this, {
-      checkboxCheckedState: checkedState,
-      checkboxIndeterminateState: indeterminateState
-    });
+    this.setCheckboxStates();
   },
+
   didUpdateAttrs() {
     this._super(...arguments);
 
+    this.setCheckboxStates();
+  },
+
+  setCheckboxStates(){
     const checkedState = get(this, 'isChecked');
-    const indeterminateState = get(this, 'isIndeterminate');
-    setProperties(this, {
-      checkboxCheckedState: checkedState,
-      checkboxIndeterminateState: indeterminateState
-    });
+    const isDisabled = get(this, 'isDisabled');
+
     const checkboxEl = document.getElementById(this.checkboxId);
     checkboxEl.checked = checkedState;
+    isDisabled && (checkboxEl.disabled = true);
   },
+
   actions: {
     onCheckBoxClick: function(e){
-      this.ariaDisabled && (e.target.checked = false);
-      set(this, 'checkboxCheckedState', e.target.checked);
       this.onClick && this.onClick(e);
     }
   }

@@ -17,26 +17,16 @@ export default Component.extend({
    */
   selectedFileArr: null,
 
+  /**
+   * Boolean that determines if role alert is set on
+   * selected count content.
+   */
   isRoleAlertSet: false,
 
   /**
    * Boolean that sets state of selected all checkbox
    */
   isSelectedAllCheckboxChecked: false,
-
-  /**
-   * count associated with the number of files 
-   * selected at any point in time
-   */
-  noOfFilesSelected: computed('noOfFilesSelected', 'isSelectedAllCheckboxChecked', 'isIndeterminate', function() {
-    const selectedFileArr = get(this, 'selectedFileArr');
-    return (selectedFileArr && get(selectedFileArr, 'length')) || 0;
-  }),
-
-  fileCountText: computed('noOfFilesSelected', function() {
-    const intlServ = get(this, 'intl')
-    return get(this, 'noOfFilesSelected') ? intlServ.t('selectedCount', {noOfFilesSelected: get(this,'noOfFilesSelected')}): intlServ.t('noneSelected')
-  }),
 
   /**
    * calculate the number of available files
@@ -54,18 +44,37 @@ export default Component.extend({
   }),
 
   /**
+   * count associated with the number of files 
+   * selected at any point in time
+   */
+  noOfFilesSelected: computed('noOfFilesSelected', 'isSelectedAllCheckboxChecked', 'isIndeterminate', function() {
+    const selectedFileArr = get(this, 'selectedFileArr');
+    return (selectedFileArr && get(selectedFileArr, 'length')) || 0;
+  }),
+
+  /**
+   * content presented to the user based 
+   * on the selected file count.
+   */
+  fileCountText: computed('noOfFilesSelected', function() {
+    const intlServ = get(this, 'intl');
+    return get(this, 'noOfFilesSelected') ? intlServ.t('selectedCount', {noOfFilesSelected: get(this,'noOfFilesSelected')}): intlServ.t('noneSelected')
+  }),
+
+  /**
    * add the newly selected file Id to selectedFileArr if it doesn't exist.
    * @param {Array} selectedFileArr Array with selected fileIds
    * @param {String} fileId         Newly selected file Id
    * @returns {Array}               Modified Array with newly selected file.
    */
-  setSelectedFile(selectedFileArr, fileId) {
+  addSelectedFile(selectedFileArr, fileId) {
     if(selectedFileArr) {
       !selectedFileArr.includes(fileId) && selectedFileArr.push(fileId);
     } else {
       selectedFileArr = selectedFileArr || [];
       selectedFileArr.push(fileId); 
     }
+    
     return selectedFileArr;
   },
 
@@ -88,7 +97,7 @@ export default Component.extend({
    * set the state of select all checkbox 
    * @param {Number} len length of selected files Array
    */
-  setSelectAllState(len) {
+  setSelectAllCheckboxState(len) {
     const noOfAvailableFiles = get(this, 'noOfAvailableFiles');
 
     if(len && len === noOfAvailableFiles) {
@@ -103,7 +112,11 @@ export default Component.extend({
     }
   },
 
-  setSelectedArr(selectedAllCheckboxState) {
+  /**
+   * set selectedFileArr based on select all checkbox state.
+   * @param {Boolean} selectedAllCheckboxState current select all checkbox checked status
+   */
+  initializeSelectedArr(selectedAllCheckboxState) {
     let arr;
     if(selectedAllCheckboxState) {
       arr = [];  
@@ -113,33 +126,53 @@ export default Component.extend({
     }
     set(this, 'selectedFileArr', arr);
   },
+
+  /**
+   * set a role alert on the file count container
+   * this helps announce selected file count to user when it changes
+   */
   announceFilesSelected() {
     const contEl = document.getElementById('select-file-count');
     contEl.setAttribute('role', 'alert');
     set(this, 'isRoleAlertSet', true);
   },
+
+  /**
+   * init hook
+   * Set the initial state of selectedFileArr
+   */
+  init() {
+    this._super(...arguments);
+
+    this.initializeSelectedArr(get(this, 'isSelectedAllCheckboxChecked'));
+  },
+
   actions: {
     /**
      * set the selected file fields based on whether a row was selected/unselected.
+     * also adjust the select all checkbox state based on number of files selected.
+     * set a role alert on the file count container if not already set.
      * @param {String} fileId       fileId the user interacted with
      * @param {Boolean} isSelected  check state of the file user interacted with
      */
     onRowClick(fileId, isSelected) {
       let modifArr;
       if(isSelected) {
-        modifArr = this.setSelectedFile(this.selectedFileArr, fileId);
+        modifArr = this.addSelectedFile(this.selectedFileArr, fileId);
       } else {
         modifArr = this.removeSelectedFile(this.selectedFileArr, fileId);
       }
       const arrLen = get(modifArr, 'length');
 
       set(this,'selectedFileArr', modifArr);
-      this.setSelectAllState(arrLen);
+      this.setSelectAllCheckboxState(arrLen);
       !this.isRoleAlertSet && this.announceFilesSelected();
     },
 
     /**
      * set isSelectedAllCheckboxChecked based on checkbox state.
+     * reinitialize selectedFileArr.
+     * set a role alert on the file count container if not already set.
      * @param {Object} e Checkbox Click Event
      */
     onSelectAllClick(e) {
@@ -147,7 +180,7 @@ export default Component.extend({
 
       set(this, 'isIndeterminate', false);
       set(this, 'isSelectedAllCheckboxChecked', checkedState);
-      this.setSelectedArr(checkedState);
+      this.initializeSelectedArr(checkedState);
       !this.isRoleAlertSet && this.announceFilesSelected();
     }
   }

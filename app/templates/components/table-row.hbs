@@ -1,4 +1,4 @@
-<td class="table-row__selector-cell">
+<td scope="row" class="table-row__selector-cell">
   {{#if file.isAvailable}}
     {{simple-checkbox
       checkboxId=(concat "checkbox-input" indx)
@@ -12,21 +12,21 @@
       checkboxId=(concat "checkbox-label" indx)
       onClick=(action "onCheckboxClick" file)
       isChecked=false
-      ariaDisabled=true
+      isDisabled=true
       labelText=(t "scheduledCheckboxLabel" name=file.name)
       labelClassNames="is-sr-only"
     }}
   {{/if}}
 </td>
-<td class="table-row__name-cell">
+<td scope="row" class="table-row__name-cell">
   {{file.name}}
 </td>
-<td class="table-row__device-cell">
+<td scope="row" class="table-row__device-cell">
   {{file.device}}
 </td>
-<td class="table-row__path-cell">
+<td scope="row" class="table-row__path-cell">
   {{file.path}}
 </td>
-<td class="table-row__status-cell {{file.status}}">
+<td scope="row" class="table-row__status-cell {{file.status}}">
   {{file.status}}
 </td>
