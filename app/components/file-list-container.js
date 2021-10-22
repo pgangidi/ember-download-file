@@ -138,6 +138,30 @@ export default Component.extend({
   },
 
   /**
+   * returns content for alert box to show when user clicks download link.
+   * @returns 
+   */
+  getAlertBoxContent() {
+    let alertContent = '';
+    const selectedFileArr = get(this, 'selectedFileArr');
+    const fileArr = get(this, 'fileList');
+    const intlServ = get(this, 'intl');
+
+    if(selectedFileArr && get(selectedFileArr, 'length')) {
+      fileArr.map((file)=> {
+        const fileId = get(file, 'id');
+        if(selectedFileArr.includes(fileId)) {
+          alertContent = `${alertContent} PATH:${get(file, 'path')}  DEVICE:${get(file, 'device')} \n`
+        }
+      })
+    } else {
+      alertContent = intlServ.t('noneSelected').toString();
+    }
+
+    return alertContent;
+  },
+
+  /**
    * init hook
    * Set the initial state of selectedFileArr
    */
@@ -182,6 +206,15 @@ export default Component.extend({
       set(this, 'isSelectedAllCheckboxChecked', checkedState);
       this.initializeSelectedArr(checkedState);
       !this.isRoleAlertSet && this.announceFilesSelected();
+    },
+    /**
+     * launch an alert modal with files selected.
+     * @param {Object} e  Event object 
+     */
+    onLinkClick(e) {
+      e.preventDefault();
+
+      alert(this.getAlertBoxContent());
     }
   }
 

@@ -27,12 +27,15 @@
     padding: 10px;
   }
 
-  &__download-link {
+  &__download-button {
     color: $body-font-color;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
     outline: none;
+    background-color: transparent;
+    border: 0;
+    font-size: $summary-font;
 
     svg {
       height: 20px;
