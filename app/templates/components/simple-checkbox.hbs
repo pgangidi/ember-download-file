@@ -4,7 +4,7 @@
   id={{checkboxId}}
   onClick={{action "onCheckBoxClick"}}
   aria-disabled="{{isDisabled}}"
-  aria-checked="{{if isIndeterminate "mixed" isChecked}}"
+  aria-checked={{ariaChecked}}
   indeterminate={{isIndeterminate}}
 >
 <label for={{checkboxId}} class={{labelClassNames}}>

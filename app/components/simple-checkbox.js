@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { get } from '@ember/object';
+import { computed, get } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
@@ -38,6 +38,20 @@ export default Component.extend({
    * label content for checkbox.
    */
   labelText: '',
+
+  /**
+   * aria-checked value based on check box state.
+   */
+  ariaChecked: computed('isIndeterminate', 'isChecked', function(){
+    const isIndeterminate = get(this, 'isIndeterminate');
+    const isChecked = get(this, 'isChecked');
+
+    if(isIndeterminate) {
+      return 'mixed';
+    }
+
+    return isChecked ? 'true' : 'false';
+  }),
 
   /**
    * set the checked and disabled state of checkbox.
