@@ -133,7 +133,7 @@ export default Component.extend({
    */
   announceFilesSelected() {
     const contEl = document.getElementById('select-file-count');
-    contEl.setAttribute('role', 'alert');
+    contEl && contEl.setAttribute('role', 'alert');
     set(this, 'isRoleAlertSet', true);
   },
 
