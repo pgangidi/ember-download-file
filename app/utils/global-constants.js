@@ -4,6 +4,7 @@ export default {
     namespace: 'rest/v1/',
     fileListAPIURL: 'files'
   },
+  ascending: 'a',
   fileStatus: {
     scheduled: 'SCHEDULED',
     available: 'AVAILABLE'

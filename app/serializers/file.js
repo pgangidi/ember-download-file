@@ -16,7 +16,7 @@ export default DS.RESTSerializer.extend({
     let attributes = {};
 
     if(payload) {
-      sortPayload(payload, CONSTANTS.defaultTableSortKey, CONSTANTS.apiConfig.ascending);
+      sortPayload(payload, CONSTANTS.defaultTableSortKey, CONSTANTS.ascending);
       attributes[primaryModelClass.modelName] = payload;
     } else {
       attributes.errors = payload || [{errorCode: CONSTANTS.defaultErrorCode}];

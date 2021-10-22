@@ -9,11 +9,11 @@ import { get } from '@ember/object';
  * @returns {Array}           Returns the sorted array.
  */
 export const sortPayload = (payload, key, order) => {
- const isOrderAscending = (order && order === CONSTANTS.apiConfig.ascending);
+ const isOrderAscending = (order && order === CONSTANTS.ascending);
 
  payload.sort((item1, item2) => {
-   const item1Val = item1[key].toLowerCase();
-   const item2Val = item2[key].toLowerCase();
+   const item1Val = item1[key];
+   const item2Val = item2[key];
 
    if((isOrderAscending && item1Val < item2Val) || (!isOrderAscending && item1Val > item2Val)) {
      return -1;
